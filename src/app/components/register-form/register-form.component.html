@@ -1,0 +1,63 @@
+<form action="">
+  <div class="main-container">
+    <mat-card appearance="raised">
+      <mat-card-header>
+        <h1 class="form-title">Registro</h1>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="container">
+          <mat-form-field appearance="fill">
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput required type="email" />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput required />
+          </mat-form-field>
+        </div>
+        <div class="container">
+          <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              type="{{ hidePassword() ? 'password' : 'text' }}"
+              required
+            />
+            <button
+              type="button"
+              matTextSuffix
+              mat-icon-button
+              (click)="toggleVisibility(0)"
+            >
+              <mat-icon>{{
+                hidePassword() ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Repetir Contraseña</mat-label>
+            <input
+              matInput
+              type="{{ hideConfirmPassword() ? 'password' : 'text' }}"
+              required
+            />
+            <button
+              type="button"
+              matTextSuffix
+              mat-icon-button
+              (click)="toggleVisibility(1)"
+            >
+              <mat-icon>{{
+                hideConfirmPassword() ? "visibility_off" : "visibility"
+              }}</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+        <a routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+      </mat-card-content>
+      <mat-card-footer>
+        <button mat-flat-button>Enviar</button>
+      </mat-card-footer>
+    </mat-card>
+  </div>
+</form>

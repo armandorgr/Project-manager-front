@@ -14,8 +14,12 @@
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 html{
-  @include mat.all-component-themes(m3-theme.$light-theme);
+  @include mat.all-component-themes(m3-theme.$dark-theme);
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+   margin: 0;
+    font-family: Roboto,
+     "Helvetica Neue", sans-serif;
+     background: var(--mat-app-background-color);    }

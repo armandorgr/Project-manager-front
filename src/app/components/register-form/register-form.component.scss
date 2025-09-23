@@ -1,0 +1,38 @@
+
+.main-container{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+mat-card{
+    width: 75%;
+    max-width: min(75%, 45em);
+}
+mat-card-content{
+    flex-grow: 0.2;
+    display: flex;
+    flex-flow: column;
+    justify-content:center;
+    align-items: end;
+    padding: 1em;
+}
+
+.container{
+    display: flex;
+    width: 100%;
+    flex-flow: row;
+    justify-content: space-between;
+    gap: 2em;
+}
+
+mat-form-field{
+    width: 100%;
+}
+mat-card-footer{
+    padding: 1em 0 1em 1em;
+}
+
+.form-title{
+    color: var(--mat-app-text-color);
+}
