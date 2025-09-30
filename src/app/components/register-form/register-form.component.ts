@@ -5,7 +5,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-
+import { FormsModule } from '@angular/forms';
+import { JsonPipe } from '@angular/common';
+import { ConfirmPasswordValDirective } from '../../directives/validations/confirm-password-val.directive';
+import { User } from '../../model/auth/user';
+import { PasswordValDirective } from '../../directives/validations/password-val.directive';
+import { MatListModule} from '@angular/material/list';
 @Component({
   selector: 'app-register-form',
   standalone: true,
@@ -16,11 +21,22 @@ import { RouterLink } from '@angular/router';
     MatButtonModule,
     MatIconModule,
     RouterLink,
+    FormsModule,
+    JsonPipe, 
+    ConfirmPasswordValDirective,
+    PasswordValDirective,
+    MatListModule
   ],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.scss',
 })
 export class RegisterFormComponent {
+  userData:User = {
+    username: "",
+    email: "",
+    password:""
+  }
+  confirmPassword:string = "";
   hidePassword = signal(true);
   hideConfirmPassword = signal(true);
 

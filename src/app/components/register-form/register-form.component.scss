@@ -16,6 +16,7 @@ mat-card-content{
     justify-content:center;
     align-items: end;
     padding: 1em;
+    gap: 1em;
 }
 
 .container{
@@ -35,4 +36,22 @@ mat-card-footer{
 
 .form-title{
     color: var(--mat-app-text-color);
+}
+
+.password-info-card{
+    background: var(--mdc-filled-text-field-container-color);
+}
+
+.password-info{
+    display: flex;
+    align-items: start;
+}
+
+.password-info-title{
+    color: var(--mat-app-text-color);
+    margin: 0;
+}
+
+.login-link{
+    height: fit-content;
 }
