@@ -1,0 +1,26 @@
+.modal-card {
+  width: 350px;
+  text-align: center;
+  mat-card-content{
+    color: var(--mat-app-text-color);
+    margin: 2em
+  }
+  mat-icon.error{
+      color: rgb(224, 73, 73);
+      font-size: 3em;
+      width: auto;
+      height: auto;
+  }
+    mat-icon.success{
+      color: rgb(62, 255, 78);
+      font-size: 3em;
+      width: auto;
+      height: auto;
+    
+  }
+}
+mat-card-actions {
+    justify-content: end;
+    padding: 0 1em 1em 0;
+}
+

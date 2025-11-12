@@ -1,131 +1,139 @@
-<form #registerForm="ngForm" passwordsMatch>
-  {{ userData | json }}
-  <div class="main-container">
-    <mat-card appearance="raised">
-      <mat-card-header>
-        <h1 class="form-title">Registro</h1>
-      </mat-card-header>
-      <mat-card-content>
-        <div class="container">
-          <mat-form-field appearance="fill">
-            <mat-label>Correo electrónico</mat-label>
-            <input
-              #emailInput="ngModel"
-              matInput
-              required
-              email
-              type="email"
-              [(ngModel)]="userData.email"
-              name="email"
-            />
-            @if (emailInput.invalid && (emailInput.dirty ||
-            emailInput.touched)){
-            <mat-error>
-              @if (emailInput.hasError('required')) { El email no puede estar
-              vacío } @if (emailInput.hasError('email')) { El email introducido
-              no es válido }
-            </mat-error>
-            }
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Nombre de usuario</mat-label>
-            <input
-              #usernameInput="ngModel"
-              matInput
-              required
-              [(ngModel)]="userData.username"
-              name="username"
-              minlength="5"
-            />
-            @if (usernameInput.invalid && (usernameInput.dirty ||
-            usernameInput.touched)){
-            <mat-error>
-              @if (usernameInput.hasError('required')) { El username no puede
-              estar vacío } @if (usernameInput.hasError('minlength')) { El
-              username debe tener mínimo 5 caracteres de longitud }
-            </mat-error>
-            }
-          </mat-form-field>
-        </div>
-        <div class="container">
-          <mat-form-field appearance="fill">
-            <mat-label>Contraseña</mat-label>
-            <input
-              class="ng-invalid"
-              matInput
-              type="{{ hidePassword() ? 'password' : 'text' }}"
-              required
-              password
-              [(ngModel)]="userData.password"
-              name="password"
-              #passwordInput="ngModel"
-            />
-            <button
-              type="button"
-              matTextSuffix
-              mat-icon-button
-              (click)="toggleVisibility(0)"
-            >
-              <mat-icon>{{
-                hidePassword() ? "visibility_off" : "visibility"
-              }}</mat-icon>
-            </button>
-            @if (registerForm.invalid && (passwordInput.dirty || passwordInput.touched)) { 
-              @if (registerForm.hasError('passwordsMismatch')) {
+<form #registerForm="ngForm" passwordsMatch (ngSubmit)="onSubmit()">
+    <div class="main-container">
+      @if (submitting()) {
+        <mat-spinner></mat-spinner>
+      } @else if (!submitting() && !submitted()) {
+        <mat-card appearance="raised">
+          <mat-card-header>
+            <h1 class="form-title">Registro</h1>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="container">
+              <mat-form-field appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input
+                  maxlength="25"
+                  #emailInput="ngModel"
+                  matInput
+                  required
+                  email
+                  type="email"
+                  [(ngModel)]="userData.email"
+                  name="email"
+                  data-testid="email"
+                />
+                @if (emailInput.invalid && (emailInput.dirty ||
+                emailInput.touched)){
+                <mat-error data-testid="email-error">
+                  @if (emailInput.hasError('required')) { El email no puede estar
+                  vacío } @if (emailInput.hasError('email')) { El email introducido
+                  no es válido }
+                </mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Nombre de usuario</mat-label>
+                <input
+                maxlength="20"
+                  #usernameInput="ngModel"
+                  matInput
+                  required
+                  [(ngModel)]="userData.username"
+                  name="username"
+                  minlength="5"
+                />
+                @if (usernameInput.invalid && (usernameInput.dirty ||
+                usernameInput.touched)){
+                <mat-error>
+                  @if (usernameInput.hasError('required')) { El username no puede
+                  estar vacío } @if (usernameInput.hasError('minlength')) { El
+                  username debe tener mínimo 5 caracteres de longitud }
+                </mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="container">
+              <mat-form-field appearance="fill">
+                <mat-label>Contraseña</mat-label>
+                <input
+                maxlength="20"
+                  class="ng-invalid"
+                  matInput
+                  type="{{ hidePassword() ? 'password' : 'text' }}"
+                  required
+                  password
+                  [(ngModel)]="userData.password"
+                  name="password"
+                  #passwordInput="ngModel"
+                />
+                <button
+                  type="button"
+                  matTextSuffix
+                  mat-icon-button
+                  (click)="toggleVisibility(0)"
+                >
+                  <mat-icon>{{
+                    hidePassword() ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                @if (registerForm.invalid && (passwordInput.dirty || passwordInput.touched)) { 
+                  @if (registerForm.hasError('passwordsMismatch')) {
+                    <mat-error>Las contraseñas no coinciden</mat-error>
+                } }
+                @if (passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)) {
+                  @if (passwordInput.hasError('password')) {
+                    <mat-error>La contraseña no cumple los requisitos</mat-error>
+                  }
+                }
+              </mat-form-field>
+              <mat-form-field appearance="fill">
+                <mat-label>Repetir Contraseña</mat-label>
+                <input
+                maxlength="20"
+                  matInput
+                  type="{{ hideConfirmPassword() ? 'password' : 'text' }}"
+                  required
+                  [(ngModel)]="confirmPassword"
+                  #confirmPasswordInput="ngModel"
+                  name="confirmPassword"
+                />
+                <button
+                  type="button"
+                  matTextSuffix
+                  mat-icon-button
+                  (click)="toggleVisibility(1)"
+                >
+                  <mat-icon>{{
+                    hideConfirmPassword() ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                @if (registerForm.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)) { 
+                  @if (registerForm.hasError('passwordsMismatch')) {
                 <mat-error>Las contraseñas no coinciden</mat-error>
-            } }
-            @if (passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)) {
-              @if (passwordInput.hasError('password')) {
-                <mat-error>La contraseña no cumple los requisitos</mat-error>
-              }
-            }
-          </mat-form-field>
-          <mat-form-field appearance="fill">
-            <mat-label>Repetir Contraseña</mat-label>
-            <input
-              matInput
-              type="{{ hideConfirmPassword() ? 'password' : 'text' }}"
-              required
-              [(ngModel)]="confirmPassword"
-              #confirmPasswordInput="ngModel"
-              name="confirmPassword"
-            />
-            <button
-              type="button"
-              matTextSuffix
-              mat-icon-button
-              (click)="toggleVisibility(1)"
-            >
-              <mat-icon>{{
-                hideConfirmPassword() ? "visibility_off" : "visibility"
-              }}</mat-icon>
+                } }
+              </mat-form-field>
+            </div>
+            <div class="container">
+              <mat-card class="password-info-card">
+                <mat-card-content class="password-info">
+                  <h4 class="password-info-title">La contraseña debe contar con:</h4>
+                  <mat-list role="list">
+                    <mat-list-item>1 Letra</mat-list-item>
+                    <mat-list-item>1 Número</mat-list-item>
+                    <mat-list-item>1 caracter especial [.!#-+]</mat-list-item>
+                    <mat-list-item>9 caracteres de longitud</mat-list-item>
+                  </mat-list>
+                </mat-card-content>
+              </mat-card>
+              <a class="login-link" routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <button type="submit" mat-flat-button [disabled]="registerForm.invalid">
+              Enviar
             </button>
-            @if (registerForm.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)) { 
-              @if (registerForm.hasError('passwordsMismatch')) {
-            <mat-error>Las contraseñas no coinciden</mat-error>
-            } }
-          </mat-form-field>
-        </div>
-        <div class="container">
-          <mat-card class="password-info-card">
-            <mat-card-content class="password-info">
-              <h4 class="password-info-title">La contraseña debe contar con:</h4>
-              <mat-list role="list">
-                <mat-list-item>1 Letra</mat-list-item>
-                <mat-list-item>1 Número</mat-list-item>
-                <mat-list-item>1 caracter especial [.!#-+]</mat-list-item>
-                <mat-list-item>9 caracteres de longitud</mat-list-item>
-              </mat-list>
-            </mat-card-content>
-          </mat-card>
-          <a class="login-link" routerLink="/login">¿Ya tienes cuenta? Inicia sesión</a>
-        </div>
-      </mat-card-content>
-      <mat-card-footer>
-        <button mat-flat-button [disabled]="registerForm.invalid">
-          Enviar
-        </button>
-      </mat-card-footer>
-    </mat-card>
-  </div>
+          </mat-card-footer>
+        </mat-card>
+      }
+    </div>
 </form>

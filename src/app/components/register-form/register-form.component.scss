@@ -55,3 +55,10 @@ mat-card-footer{
 .login-link{
     height: fit-content;
 }
+
+p.response-message{
+    color: var(--mat-app-text-color);
+    font-size: var(--mat-card-title-text-size);
+    align-self: center;
+}
+
