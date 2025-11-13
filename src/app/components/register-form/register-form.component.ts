@@ -51,7 +51,6 @@ export class RegisterFormComponent {
   hideConfirmPassword = signal(true);
   submitting = signal(false);
   submitted = signal(false);
-  registerResponse?: HttpResponse<ApiResponse<string>>;
 
   resetPage() {
     const currentUrl = this.router.url;
@@ -60,11 +59,11 @@ export class RegisterFormComponent {
     });
   }
 
-  showResponseModal(response: HttpResponse<ApiResponse<null>>) {
+  private showResponseModal(response: HttpResponse<ApiResponse<null>>) {
     const data: ModalDialogData = {
       icon: response.status === 201 ? 'check' : 'error',
       iconClass: response.status === 201 ? 'success' : 'error',
-      message: response.body?.message || 'Undefined error',
+      message: response.body?.message || 'Undefined',
       actions:
         response.status === 201
           ? [

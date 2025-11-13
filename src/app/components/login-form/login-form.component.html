@@ -1,4 +1,5 @@
-<form action="">
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  @if (!submitting() && !submitted()) {
   <div class="main-container">
     <mat-card appearance="raised">
       <mat-card-header>
@@ -8,13 +9,20 @@
         <div class="container">
           <mat-form-field appearance="fill">
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput required />
+            <input
+              [(ngModel)]="request.username"
+              matInput
+              required
+              name="username"
+            />
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>Contraseña</mat-label>
             <input
               matInput
               type="{{ hidePassword() ? 'password' : 'text' }}"
+              name="password"
+              [(ngModel)]="request.password"
               required
             />
             <button
@@ -32,8 +40,13 @@
         <a routerLink="/register">¿No tienes cuenta? Registrate</a>
       </mat-card-content>
       <mat-card-footer>
-        <button mat-flat-button>Enviar</button>
+        <button type="submit" mat-flat-button [disabled]="loginForm.invalid">
+          Enviar
+        </button>
       </mat-card-footer>
     </mat-card>
   </div>
+  }@else if (submitting()){
+  <mat-spinner></mat-spinner>
+  }
 </form>

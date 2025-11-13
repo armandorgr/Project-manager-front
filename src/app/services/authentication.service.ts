@@ -6,7 +6,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { ApiResponse, RegisterRequest } from '../model';
+import { ApiResponse, LoginRequest, RegisterRequest } from '../model';
 import { BaseService } from '../shared/api/service/api.base.service';
 
 @Injectable({
@@ -17,7 +17,7 @@ export class AuthenticationService extends BaseService {
     super();
   }
 
-  public register(
+  register(
     request: RegisterRequest
   ): Observable<HttpResponse<ApiResponse<null>>> {
     return this.httpClient
@@ -27,6 +27,19 @@ export class AuthenticationService extends BaseService {
         body: request,
         responseType: 'json',
         observe: 'response',
+      })
+      .pipe(catchError(this.handleErrors<ApiResponse<null>>));
+  }
+
+  login(request: LoginRequest): Observable<HttpResponse<ApiResponse<null>>> {
+    return this.httpClient
+      .request<ApiResponse<null>>('post', '/auth/login', {
+        context: new HttpContext(),
+        headers: new HttpHeaders(),
+        body: request,
+        responseType: 'json',
+        observe: 'response',
+        withCredentials: true,
       })
       .pipe(catchError(this.handleErrors<ApiResponse<null>>));
   }
