@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard, publicGuard } from './shared/api/guards';
 
 export const routes: Routes = [
   {
@@ -7,7 +8,8 @@ export const routes: Routes = [
       import('./components/register-form/register-form.component').then(
         (m) => m.RegisterFormComponent
       ),
-      title: 'Registro'
+    title: 'Registro',
+    canActivate: [publicGuard],
   },
   {
     path: 'login',
@@ -15,7 +17,8 @@ export const routes: Routes = [
       import('./components/login-form/login-form.component').then(
         (m) => m.LoginFormComponent
       ),
-      title: 'Inicio de sesión'
+    title: 'Inicio de sesión',
+    canActivate: [publicGuard],
   },
   {
     path: 'home',
@@ -23,6 +26,12 @@ export const routes: Routes = [
       import('./components/home-page/home-page.component').then(
         (m) => m.HomePageComponent
       ),
-      title: 'Home'
-  }
+    title: 'Home',
+    canActivate: [authGuard],
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  },
 ];

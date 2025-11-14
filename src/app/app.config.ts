@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApiPrefixInterceptor } from './shared/api/service/interceptors/apiPrefixInterceptor';
+import { authInterceptor } from './shared/api/service/interceptors/auth.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
@@ -12,6 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([ApiPrefixInterceptor])),
+    provideHttpClient(withInterceptors([ApiPrefixInterceptor, authInterceptor])),
   ],
 };

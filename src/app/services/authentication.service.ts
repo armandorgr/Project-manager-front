@@ -43,4 +43,30 @@ export class AuthenticationService extends BaseService {
       })
       .pipe(catchError(this.handleErrors<ApiResponse<null>>));
   }
+
+  checkAuth(): Observable<HttpResponse<ApiResponse<null>>> {
+    return this.httpClient
+      .request<ApiResponse<null>>('get', '/auth/me', {
+        context: new HttpContext(),
+        headers: new HttpHeaders(),
+        responseType: 'json',
+        observe: 'response',
+        withCredentials: true,
+      })
+      .pipe(catchError(this.handleErrors<ApiResponse<null>>));
+  }
+  
+  refresh(): Observable<HttpResponse<ApiResponse<null>>> {
+    return this.httpClient
+      .request<ApiResponse<null>>('post', '/auth/refresh', {
+        context: new HttpContext(),
+        headers: new HttpHeaders(),
+        responseType: 'json',
+        observe: 'response',
+        withCredentials: true,
+      })
+      .pipe(catchError(this.handleErrors<ApiResponse<null>>));
+  }
+
+
 }
