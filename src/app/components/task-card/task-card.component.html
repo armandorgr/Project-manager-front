@@ -1,0 +1,40 @@
+<mat-card class="task-card" appearance="outlined" (click)="onClick()">
+  <mat-card-header>
+    <mat-card-title>{{ task.name }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ task.dueDate | date : "mediumDate" }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="description">{{ task.description }}</p>
+
+    <div class="chips">
+      <mat-chip-set aria-label="Task properties">
+        <mat-chip
+          class="task-chip"
+          [ngClass]="{
+            'priority-high': task.priority === TaskPriority.HIGH,
+            'priority-medium': task.priority === TaskPriority.MEDIUM,
+            'priority-low': task.priority === TaskPriority.LOW
+          }"
+        >
+          <mat-icon>{{ task.priority | taskPriority }}</mat-icon>
+          {{ task.priority | titlecase }}
+        </mat-chip>
+
+        <mat-chip
+          class="task-chip"
+          [ngClass]="{
+            'status-done': task.status === TaskStatus.DONE,
+            'status-in-progress': task.status === TaskStatus.IN_PROGRESS,
+            'status-not-started': task.status === TaskStatus.NOT_STARTED
+          }"
+        >
+          <mat-icon>{{ task.status | taskStatus }}</mat-icon>
+          {{ task.status.replace("_", " ") | titlecase }}
+        </mat-chip>
+      </mat-chip-set>
+    </div>
+  </mat-card-content>
+</mat-card>

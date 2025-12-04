@@ -1,0 +1,29 @@
+<mat-card appearance="raised" class="project-card">
+  <mat-card-header>
+    <mat-card-title>{{ project.name }}</mat-card-title>
+    <mat-card-subtitle *ngIf="project.description">
+      {{ project.description }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="dates">
+      <div *ngIf="project.startDate">
+        <mat-icon>event</mat-icon>
+        Start: {{ project.startDate | date }}
+      </div>
+
+      <div *ngIf="project.endDate">
+        <mat-icon>flag</mat-icon>
+        End: {{ project.endDate | date }}
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openDetails()">
+      Details
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

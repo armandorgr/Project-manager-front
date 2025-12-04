@@ -1,0 +1,11 @@
+<header class="app-header">
+  <div class="app-header__logo">{{ appName }}</div>
+  <nav class="app-header__nav">
+    <a routerLink="/projects">Projects</a>
+    <a routerLink="/assigned-tasks">Assigned Tasks</a>
+    <a routerLink="/invitations">Invitations</a>
+  </nav>
+  <div class="app-header__actions">
+    <button (click)="logout()">Logout</button>
+  </div>
+</header>

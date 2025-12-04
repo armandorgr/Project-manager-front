@@ -4,16 +4,18 @@ import { MatCardModule } from "@angular/material/card";
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 
+export interface DialogAction{  
+    label: string; // Texto del botón
+    action: 'close' | 'custom'; // Qué hace (cerrar o emitir evento)
+    value?: any; // Valor opcional que se devuelve si es custom
+  
+}
+
 export interface ModalDialogData {
   icon: string; // Nombre del icono de Material (e.g. "check", "error", "info")
   iconClass?: string; // Clase CSS adicional (e.g. "success", "error")
   message: string; // Texto o HTML
-  actions: {
-    label: string; // Texto del botón
-    color?: string; // Color Angular Material (primary, accent, warn)
-    action: 'close' | 'custom'; // Qué hace (cerrar o emitir evento)
-    value?: any; // Valor opcional que se devuelve si es custom
-  }[];
+  actions:DialogAction[];
 }
 
 @Component({

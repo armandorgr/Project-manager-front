@@ -1,0 +1,26 @@
+<mat-card class="invitation-card">
+  <mat-card-header>
+    <div mat-card-avatar class="invitation-header-image">
+      <mat-icon>mail</mat-icon>
+    </div>
+    <mat-card-title>Project Invitation</mat-card-title>
+      </mat-card-header>
+
+  <mat-card-content>
+    <p class="message-body">
+      {{ invitation.message }}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-button color="warn" (click)="onReject()">
+      <mat-icon>close</mat-icon>
+      Reject
+    </button>
+
+    <button mat-flat-button color="primary" (click)="onAccept()">
+      <mat-icon>check</mat-icon>
+      Accept
+    </button>
+  </mat-card-actions>
+</mat-card>

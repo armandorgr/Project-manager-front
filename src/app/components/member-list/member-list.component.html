@@ -1,0 +1,13 @@
+<mat-card class="member-card">
+  <div *ngFor="let member of members" class="member-row">
+    <div class="info">
+      <span class="username">{{ member.user.username }}</span>
+      <span class="role">{{ member.role }}</span>
+    </div>
+    @if(currentUserRole==='ADMIN' && currentUser.id!==member.user.id){
+    <button mat-icon-button (click)="removeMember(member)">
+      <mat-icon>delete</mat-icon>
+    </button>
+    }
+  </div>
+</mat-card>

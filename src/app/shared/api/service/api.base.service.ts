@@ -1,4 +1,7 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpResponse,
+} from '@angular/common/http';
 import { of } from 'rxjs';
 
 export class BaseService {

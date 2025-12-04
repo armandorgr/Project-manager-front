@@ -1,0 +1,24 @@
+mat-card-header{
+    justify-content: start;
+}
+
+.invitation-card {
+  max-width: 400px;
+  margin: 10px;
+  // Optional: Add a subtle border or shadow lift
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+}
+
+.invitation-header-image {
+  background-color: #e0e0e0; // Light grey background for avatar
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+}
+
+.message-body {
+  font-style: italic;
+  margin-top: 8px;
+  margin-bottom: 16px;
+}

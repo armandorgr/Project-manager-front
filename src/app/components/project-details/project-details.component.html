@@ -1,0 +1,82 @@
+@if (loading()) {
+<div class="loading-container">
+  <mat-progress-spinner mode="indeterminate" diameter="60" />
+</div>
+} @if (project(); as p) {
+<mat-card class="project-card" appearance="raised">
+  <mat-card-header>
+    <mat-card-title>{{ p.name }}</mat-card-title>
+    @if(project()?.role === 'ADMIN'){
+    <div class="project-actions">
+      <button
+        mat-icon-button
+        class="edit-button"
+        (click)="openUpdateProjectDialog()"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="delete-button"
+        (click)="openDeleteDialog()"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="invite-button"
+        (click)="openInviteDialog()"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+    }
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-card-subtitle>
+      {{ p.startDate | date }} - {{ p.endDate | date }}
+    </mat-card-subtitle>
+    <p class="description">{{ p.description }}</p>
+  </mat-card-content>
+  @if(project()?.role==='ADMIN'){
+  <button
+    mat-raised-button
+    class="create-task"
+    (click)="openCreateTaskDialog()"
+  >
+    Create task
+  </button>
+  }
+</mat-card>
+
+<mat-divider class="divider"></mat-divider>
+
+<mat-tab-group animationDuration="500ms">
+  <mat-tab label="Tasks">
+    <div class="tab-content task-container">
+      @for (task of tasks(); track task.name) {
+      <app-task-card
+        [task]="task"
+        [taskId]="task.id"
+        (navigate)="navigateTaskDetails($event)"
+      />
+      } @empty {
+      <p class="no-tasks">This project has no tasks yet.</p>
+      }
+    </div>
+  </mat-tab>
+
+  <mat-tab label="Members">
+    <div class="tab-content members-container">
+      <app-member-list
+        [members]="members()"
+        (memberRemoved)="onMemberRemove($event)"
+        [currentUser]="currentUser()!"
+        [currentUserRole]="project()?.role!"
+      >
+      </app-member-list>
+    </div>
+  </mat-tab>
+</mat-tab-group>
+}

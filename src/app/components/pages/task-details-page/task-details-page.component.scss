@@ -1,0 +1,146 @@
+// Contenedor principal con padding
+.details-container {
+  max-width: 1200px; // Opcional: para que no se estire demasiado en pantallas gigantes
+  margin: 0 auto;
+  padding: 24px;
+}
+
+// Header: Flexbox para separar título y botón
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .header-title {
+    h1 {
+      margin: 0; // Reset del margen por defecto del h1 de Material
+    }
+    .task-id {
+      // Usamos el color de texto secundario del tema actual
+      color: var(--mat-sys-on-surface-variant);
+    }
+  }
+}
+
+.task-actions{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  
+}
+
+// Layout Principal: Grid CSS para sidebar
+.details-layout {
+  display: grid;
+  grid-template-columns: 1fr; // Móvil primero: una columna
+  gap: 32px;
+
+  // En pantallas medianas/grandes, layout de 2 columnas (contenido principal | sidebar)
+  @media (min-width: 960px) {
+    grid-template-columns: 2fr 1fr;
+    align-items: start; // Para que el sidebar no se estire si la descripción es larga
+  }
+}
+
+// Estilos de la columna principal
+.main-content {
+  .section-title {
+    margin-bottom: 16px;
+    // Un color ligeramente menos intenso para los subtítulos
+    color: var(--mat-sys-on-surface-variant);
+  }
+
+  .description-text {
+    white-space: pre-wrap; // Mantiene los saltos de línea si la descripción los tiene
+    line-height: 1.6;
+  }
+
+  .section-divider {
+    margin: 32px 0;
+  }
+
+  // Placeholder temporal para comentarios
+  .comments-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px;
+    border: 2px dashed var(--mat-sys-outline-variant); // Borde discontinuo sutil usando el tema
+    border-radius: 12px;
+    color: var(--mat-sys-on-surface-variant);
+
+    .placeholder-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+  }
+}
+
+.comments-section{
+  &__header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: end;
+    flex-wrap: wrap;
+    margin: 1em;
+
+    button{
+      mat-icon{
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Estilos del Sidebar de Metadatos
+.sidebar {
+  .meta-card {
+    // Hacemos la tarjeta un poco más limpia quitando el padding extra del wrapper
+    // y aplicándolo directamente al contenido con gap.
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 24px; // Espacio vertical entre items
+      padding: 24px !important; // Forzamos el padding interno
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 16px; // Espacio entre icono y texto
+
+      .meta-icon {
+        color: var(--mat-sys-primary); // Usamos el color primario del tema para los iconos
+        background-color: var(--mat-sys-primary-container);
+        padding: 8px;
+        border-radius: 50%;
+
+        // Ejemplo de cómo variar el color del icono de estado según el tema
+        // sin hardcodear colores, usando las variables de sistema de Material 3
+        &.status-icon[data-status="DONE"] { color: var(--mat-sys-primary); }
+        &.status-icon[data-status="IN_PROGRESS"] { color: var(--mat-sys-tertiary); }
+        &.status-icon[data-status="NOT_STARTED"] { color: var(--mat-sys-on-surface-variant); }
+      }
+
+      .meta-data {
+        display: flex;
+        flex-direction: column;
+
+        .label {
+          color: var(--mat-sys-on-surface-variant);
+        }
+        .value {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+/* Contenedor principal */
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Loading spinner centrado */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+/* Card del proyecto */
+.project-card {
+  position: relative;
+  border-radius: 12px;
+  padding: 1em 0;
+  
+  mat-card-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  mat-card-title {
+    font-size: 3em;
+    font-weight: 600;
+    margin-bottom: 0.5em;
+  }
+
+  mat-card-subtitle {
+    font-size: 1.5em;
+  }
+
+  .project-actions{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .description {
+    margin-top: 16px;
+    font-size: 1em;
+    line-height: 1.6;
+  }
+}
+
+/* Divider */
+.divider {
+  margin: 24px 0;
+}
+
+/* Título de sección de tareas */
+.tasks-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+/* Grid responsive para tareas */
+:host ::ng-deep app-task-card {
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* Mensaje cuando no hay tareas */
+.no-tasks {
+  font-style: italic;
+  padding: 16px 0;
+}
+
+.task-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px
+}
+
+.create-task{
+  width: fit-content;
+  margin: 1em;
+  align-self: flex-end;
+}
+.tab-content {
+    padding: 1em 0; 
+}

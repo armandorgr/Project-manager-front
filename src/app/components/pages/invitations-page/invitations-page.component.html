@@ -1,0 +1,11 @@
+<h2>My Invitations</h2>
+<div class="invitation-list">
+  @for (invite of invitations(); track invite.projectId) {
+  <app-invitation-card
+    [invitation]="invite"
+    (accept)="onAccept($event)"
+    (reject)="onReject($event)"
+  >
+  </app-invitation-card>
+  }
+</div>

@@ -1,0 +1,60 @@
+.comment-card {
+  /* Diseño moderno: borde sutil, sin sombra pesada, esquinas redondeadas */
+  border-radius: 12px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  margin-bottom: 1rem;
+
+}
+
+.avatar-circle {
+  background-color: #f5f5f5; /* Gris muy suave */
+  color: #424242;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.date-info {
+  font-size: 0.8rem;
+  
+  .edited-badge {
+    font-style: italic;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-left: 4px;
+  }
+}
+
+.comment-text {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  white-space: pre-wrap; /* Respeta los saltos de línea del usuario */
+}
+
+.actions-container {
+  /* Ajustar la opacidad de los botones hasta que se haga hover sobre la tarjeta */
+  /* Esto hace la UI muy limpia (opcional, eliminar si se prefiere siempre visible) */
+  button {
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+}
+
+
+mat-card-header{
+    justify-content: start;
+}
+/* Ajustes para el componente mat-card-content para darle aire */
+mat-card-content {
+  padding-bottom: 8px;
+}

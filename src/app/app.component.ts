@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RegisterFormComponent } from './components/register-form/register-form.component';
+import { AppHeaderComponent } from './components/app-header/app-header.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RegisterFormComponent],
+  imports: [RouterOutlet, AppHeaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'project_manager';
 }

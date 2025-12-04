@@ -1,0 +1,102 @@
+@if (task(); as t) {
+<div class="details-container">
+  <header class="details-header">
+    <div class="header-title">
+      <h1 class="mat-headline-5">{{ t.name }}</h1>
+    </div>
+    @if(project()?.role === 'ADMIN'){
+    <div class="task-actions">
+      <button mat-flat-button color="primary" (click)="openUpdateDialog()">
+        <mat-icon>edit</mat-icon>
+        Edit task
+      </button>
+      <button mat-flat-button (click)="openDeleteDialog()">
+        <mat-icon>delete</mat-icon>
+        Delete task
+      </button>
+    </div>
+    }
+  </header>
+
+  <div class="details-layout">
+    <main class="main-content">
+      <section class="description-section">
+        <h2 class="section-title mat-title-medium">Description</h2>
+        <p class="mat-body-1 description-text">{{ t.description }}</p>
+      </section>
+      <mat-divider class="section-divider"></mat-divider>
+      <section class="comments-section">
+        <div class="comments-section__header">
+          <h2 class="section-title mat-title-medium">Comments</h2>
+          <button mat-flat-button (click)="openCreateCommentDialog()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div class="comments-list">
+          @for (comment of comments(); track comment.id) {
+          <app-comment-card
+            [comment]="comment"
+            (edit)="updateComment($event)"
+            (delete)="deleteComment($event)"
+            [currentUserId]="currentUser()?.id!"
+          ></app-comment-card>
+          }
+        </div>
+      </section>
+    </main>
+
+    <aside class="sidebar">
+      <mat-card appearance="outlined" class="meta-card">
+        <mat-card-content class="meta-list">
+          <div class="meta-item">
+            <mat-icon
+              class="meta-icon status-icon"
+              [attr.data-status]="t.status"
+            >
+              {{ t.status | taskStatus }}
+            </mat-icon>
+            <div class="meta-data">
+              <span class="mat-caption label">State</span>
+              <span class="mat-body-2 value">{{
+                formatEnum(t.status) | titlecase
+              }}</span>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <mat-icon class="meta-icon">{{
+              t.priority | taskPriority
+            }}</mat-icon>
+            <div class="meta-data">
+              <span class="mat-caption label">Priority</span>
+              <span class="mat-body-2 value">{{ t.priority | titlecase }}</span>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <mat-icon class="meta-icon">calendar_today</mat-icon>
+            <div class="meta-data">
+              <span class="mat-caption label">Due date</span>
+              <span class="mat-body-2 value">{{
+                t.dueDate | date : "mediumDate"
+              }}</span>
+            </div>
+          </div>
+
+          <div class="meta-item">
+            <mat-icon class="meta-icon">person_outline</mat-icon>
+            <div class="meta-data">
+              <span class="mat-caption label">Assigned to</span>
+              <span class="mat-body-2 value">{{
+                t.assignedUser?.username ?? "No one"
+              }}</span>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </aside>
+  </div>
+</div>
+} @else {
+<p class="mat-body-1">Cargando tarea...</p>
+}

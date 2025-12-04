@@ -1,0 +1,8 @@
+<div class="task-container">
+  <!-- List of tasks -->
+  @for (task of tasks(); track task.name) {
+  <app-task-card [task]="task" [taskId]="task.id" (navigate)="navigateDetails($event)"/>
+  } @empty {
+  <p class="no-tasks">No tasks found.</p>
+  }
+</div>
