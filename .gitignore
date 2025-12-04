@@ -7,7 +7,6 @@
 /bazel-out
 
 src/app/api
-*/environments
 api-docs.yaml
 
 # Node
